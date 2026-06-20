@@ -7,8 +7,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/users';
-
+  private apiUrl = 'https://dashboard-api-production-2463.up.railway.app/auth';
   private currentUser = signal<User | null>(null);
   user = this.currentUser.asReadonly();
 
