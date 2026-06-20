@@ -1,0 +1,21 @@
+<input [formControl]="searchControl" placeholder="Search by name..." />
+<p>Filtering by role: {{ role() ?? 'all' }}</p>
+
+@if (loading()) {
+  <p class="loading">Loading users...</p>
+} @else {
+  <ul>
+    @for (u of filteredUsers(); track u.id) {
+      <li>
+        <div>{{ u.name }} - {{ u.email }}</div>
+
+        <button (click)="deleteUser(u.id)">Delete</button>
+      </li>
+    }
+  </ul>
+}
+<nav>
+  <a routerLink="/users" [queryParams]="{ role: 'admin' }">Admins only</a>
+  <a routerLink="/users" [queryParams]="{ role: 'editor' }">Editors only</a>
+  <a routerLink="/users">All users</a>
+</nav>

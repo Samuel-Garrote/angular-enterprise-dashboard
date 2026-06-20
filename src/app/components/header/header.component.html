@@ -1,0 +1,16 @@
+<header>
+  <h1>{{ appTitle }}</h1>
+
+  @if (authService.isLoggedIn()) {
+    <p>Active session</p>
+    <app-notification-badge [count]="notificationCount" (closed)="onNotificationsDismissed()" />
+  } @else {
+    <p>You are not logged in</p>
+  }
+
+  <nav>
+    <a routerLink="/">Dashboard</a>
+    <a routerLink="/users">Users</a>
+    <a routerLink="/create-user">Create user</a>
+  </nav>
+</header>
