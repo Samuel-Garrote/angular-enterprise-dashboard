@@ -15,11 +15,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/user-detail/user-detail.component').then((m) => m.UserDetailComponent),
     resolve: { user: userResolver },
+    canActivate: [authGuard],
   },
   {
     path: 'create-user',
     loadComponent: () =>
       import('./pages/create-user/create-user.component').then((m) => m.CreateUserComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'login',
