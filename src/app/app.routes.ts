@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './guards/auth.guard';
-import { userResolver } from './resolvers/user.resolver';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -14,7 +13,6 @@ export const routes: Routes = [
     path: 'users/:id',
     loadComponent: () =>
       import('./pages/user-detail/user-detail.component').then((m) => m.UserDetailComponent),
-    resolve: { user: userResolver },
     canActivate: [authGuard],
   },
   {

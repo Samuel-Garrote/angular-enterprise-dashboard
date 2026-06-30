@@ -30,6 +30,7 @@ export class LoginComponent {
           this.authService.setToken(response.access_token);
           this.router.navigate(['/']);
         },
+
         error: () => {
           this.errorMessage = 'Invalid email or password';
         },

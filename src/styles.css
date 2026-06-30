@@ -1,112 +1,202 @@
-/* ==========================================
-   BASE STYLES & RESET
-   Normalización inicial y estilos globales
-========================================== */
+/* ==========================================================
+   DESIGN SYSTEM
+========================================================== */
 
-* {
+:root {
+  /* Background */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #eef2ff;
+
+  /* Surfaces */
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-hover: rgba(255, 255, 255, 0.95);
+
+  /* Text */
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+
+  /* Accent */
+  --primary: #6366f1;
+  --primary-dark: #4338ca;
+  --primary-light: #818cf8;
+
+  /* Borders */
+  --border: rgba(99, 102, 241, 0.15);
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+
+  /* Shadows */
+
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+  --shadow-card: 0 25px 60px rgba(15, 23, 42, 0.12);
+
+  --shadow-hover: 0 35px 80px rgba(15, 23, 42, 0.18);
+
+  --shadow-primary: 0 15px 40px rgba(99, 102, 241, 0.25);
+
+  --transition: 0.25s ease;
+}
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+
   min-height: 100vh;
-  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+
+  font-family: Inter, 'Segoe UI', sans-serif;
+
+  color: var(--text-primary);
+
   background:
     radial-gradient(circle at top left, #dbeafe, transparent 35%),
-    linear-gradient(135deg, #f8fafc, #eef2ff);
-
-  color: #111827;
+    radial-gradient(circle at bottom right, #ddd6fe, transparent 35%),
+    linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
 }
 
-/* ==========================================
-   HEADER SECTION
-   Cabecera principal de la aplicación
-========================================== */
+/* ==========================================================
+   HEADER
+========================================================== */
 
 header {
-  background: linear-gradient(135deg, #111827, #312e81);
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 35px 45px;
 
   color: white;
-  padding: 28px 40px;
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #111827, #312e81);
+
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
 }
 
 header h1 {
   margin: 0;
-  font-size: 2rem;
-  letter-spacing: -0.5px;
+
+  font-size: 2.2rem;
+
+  letter-spacing: -1px;
 }
 
-/* ==========================================
-   NAVIGATION
-   Barra de navegación y enlaces principales
-========================================== */
+header::after {
+  content: '';
+
+  position: absolute;
+
+  right: -100px;
+
+  top: -100px;
+
+  width: 300px;
+
+  height: 300px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.45), transparent 70%);
+}
+
+/* ==========================================================
+   NAV
+========================================================== */
 
 nav {
   display: flex;
-  gap: 25px;
 
-  padding: 16px 40px;
+  gap: 30px;
 
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  padding: 18px 45px;
+
+  background: rgba(255, 255, 255, 0.65);
+
+  backdrop-filter: blur(15px);
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
 }
 
 nav a {
-  color: #4338ca;
+  color: var(--primary-dark);
 
   text-decoration: none;
 
-  font-weight: 600;
+  font-weight: 700;
 
-  transition: 0.2s;
+  transition:
+    color var(--transition),
+    transform var(--transition);
 }
 
 nav a:hover {
-  color: #7c3aed;
+  color: var(--primary);
 
   transform: translateY(-2px);
 }
 
-/* ==========================================
-   LAYOUT CONTAINERS
-   Control de anchura y separación vertical
-========================================== */
+/* ==========================================================
+   LAYOUT
+========================================================== */
 
 main,
 form,
 ul {
-  width: min(700px, 90%);
+  width: min(760px, 90%);
 
-  margin: 35px auto;
+  margin: 40px auto;
 }
 
-/* ==========================================
-   FORM COMPONENT
-   Formulario principal de entrada de datos
-========================================== */
+/* ==========================================================
+   FORM CARD
+========================================================== */
 
 form {
   display: flex;
 
   flex-direction: column;
 
-  gap: 18px;
+  gap: 20px;
 
-  background: rgba(255, 255, 255, 0.75);
+  padding: 35px;
 
-  backdrop-filter: blur(15px);
+  background: var(--surface);
 
-  padding: 30px;
+  backdrop-filter: blur(20px);
 
-  border-radius: 20px;
+  border: 1px solid var(--border);
 
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+  border-radius: var(--radius-lg);
 
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-card);
+
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+form:hover {
+  transform: translateY(-6px);
+
+  box-shadow: var(--shadow-hover);
 }
 
 label {
@@ -116,246 +206,90 @@ label {
 
   gap: 8px;
 
+  color: var(--text-secondary);
+
+  font-weight: 700;
+
   font-size: 0.9rem;
-
-  font-weight: 600;
-
-  color: #374151;
 }
 
-/* Campos de entrada y controles */
+/* ==========================================================
+   INPUTS
+========================================================== */
 
 input,
 select {
-  padding: 13px 15px;
+  padding: 14px 16px;
 
-  border-radius: 12px;
-
-  border: 1px solid #d1d5db;
+  color: var(--text-primary);
 
   background: white;
 
-  font-size: 1rem;
+  border: 1px solid #d1d5db;
 
-  transition: 0.2s;
+  border-radius: var(--radius-md);
+
+  box-shadow: inset 0 2px 8px rgba(15, 23, 42, 0.05);
+
+  transition:
+    border var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
 }
 
 input:hover,
 select:hover {
-  border-color: #818cf8;
+  border-color: var(--primary-light);
 }
 
 input:focus,
 select:focus {
   outline: none;
 
-  border-color: #6366f1;
+  border-color: var(--primary);
 
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+  box-shadow:
+    0 0 0 4px rgba(99, 102, 241, 0.18),
+    0 8px 20px rgba(99, 102, 241, 0.12);
+
+  transform: translateY(-2px);
 }
 
-/* ==========================================
-   ACTION BUTTONS
-   Botones y estados interactivos
-========================================== */
+/* ==========================================================
+   BUTTONS
+========================================================== */
 
 button {
-  padding: 13px 20px;
-
-  border: none;
-
-  border-radius: 12px;
-
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
-
-  color: white;
-
-  cursor: pointer;
-
-  font-weight: 600;
-
-  transition: 0.25s;
-
-  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.25);
-}
-
-button:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.35);
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-/* Estado deshabilitado */
-
-button[disabled] {
-  background: #cbd5e1;
-
-  box-shadow: none;
-
-  cursor: not-allowed;
-}
-
-/* Botones secundarios */
-
-button[type='button'] {
-  background: #e5e7eb;
-
-  color: #111827;
-
-  box-shadow: none;
-}
-
-/* ==========================================
-   LIST COMPONENT
-   Contenedor de elementos dinámicos
-========================================== */
-
-ul {
-  list-style: none;
-
-  padding: 0;
-
-  background: rgba(255, 255, 255, 0.8);
-
-  backdrop-filter: blur(12px);
-
-  border-radius: 20px;
+  position: relative;
 
   overflow: hidden;
 
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
-
-li {
   display: flex;
-
-  justify-content: space-between;
 
   align-items: center;
 
-  padding: 18px 22px;
+  justify-content: center;
 
-  border-bottom: 1px solid #eee;
+  padding: 14px 24px;
 
-  transition: 0.2s;
-}
+  border: none;
 
-li:hover {
-  background: rgba(99, 102, 241, 0.06);
+  border-radius: var(--radius-md);
 
-  transform: translateX(5px);
-}
+  color: white;
 
-li:last-child {
-  border-bottom: none;
-}
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
 
-span {
-  color: #6b7280;
+  cursor: pointer;
 
-  font-size: 0.9rem;
-}
+  font-weight: 700;
 
-/* ==========================================
-   RESPONSIVE DESIGN
-   Ajustes para dispositivos pequeños
-========================================== */
+  box-shadow: var(--shadow-primary);
 
-@media (max-width: 600px) {
-  header {
-    padding: 25px;
-  }
-
-  nav {
-    padding: 15px 25px;
-  }
-
-  li {
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 10px;
-  }
-}
-
-/* ==========================================
-   UI ENHANCEMENTS
-   Mejoras visuales y microinteracciones
-========================================== */
-
-/* Scroll suave */
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Decoración visual del header */
-
-header {
-  position: relative;
-
-  overflow: hidden;
-}
-
-header::after {
-  content: '';
-
-  position: absolute;
-
-  width: 260px;
-  height: 260px;
-
-  right: -80px;
-  top: -100px;
-
-  background: radial-gradient(circle, rgba(129, 140, 248, 0.35), transparent 70%);
-
-  border-radius: 50%;
-
-  pointer-events: none;
-}
-
-/* Efecto elevado para tarjetas */
-
-form,
-ul {
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-form:hover,
-ul:hover {
-  transform: translateY(-5px);
-
-  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.16);
-}
-
-/* Mejoras visuales en inputs */
-
-input,
-select {
-  box-shadow: inset 0 2px 6px rgba(15, 23, 42, 0.05);
-}
-
-input:focus,
-select:focus {
-  transform: translateY(-1px);
-}
-
-/* Feedback visual del botón */
-
-button {
-  position: relative;
-
-  overflow: hidden;
-
-  isolation: isolate;
+    transform var(--transition),
+    box-shadow var(--transition),
+    filter var(--transition);
 }
 
 button::before {
@@ -363,46 +297,183 @@ button::before {
 
   position: absolute;
 
-  top: 0;
-  left: -120%;
-
-  width: 100%;
-  height: 100%;
+  inset: 0;
 
   background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
 
-  transition: 0.5s;
+  transform: translateX(-120%);
 
-  z-index: -1;
+  transition: transform 0.6s ease;
 }
 
 button:hover::before {
-  left: 120%;
+  transform: translateX(120%);
 }
 
-/* Estado hover mejorado de listas */
+button:hover {
+  transform: translateY(-4px);
+
+  filter: brightness(1.08);
+
+  box-shadow: 0 25px 55px rgba(99, 102, 241, 0.4);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.3);
+
+  outline-offset: 4px;
+}
+
+/* Disabled */
+
+button:disabled {
+  cursor: not-allowed;
+
+  background: #cbd5e1;
+
+  color: #64748b;
+
+  box-shadow: none;
+
+  transform: none;
+}
+
+/* Secondary */
+
+button[type='button'] {
+  color: var(--text-primary);
+
+  background: #e5e7eb;
+
+  box-shadow: var(--shadow-soft);
+}
+
+button[type='button']:hover {
+  background: #d1d5db;
+
+  box-shadow: var(--shadow-card);
+}
+
+/* ==========================================================
+   LIST / ITEMS
+========================================================== */
+
+ul {
+  padding: 0;
+
+  list-style: none;
+
+  overflow: hidden;
+
+  background: var(--surface);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-card);
+
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+
+  animation: appear 0.45s ease;
+}
+
+ul:hover {
+  transform: translateY(-5px);
+
+  box-shadow: var(--shadow-hover);
+}
 
 li {
-  transition: 0.25s ease;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 20px 24px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    padding var(--transition);
+}
+
+li:last-child {
+  border-bottom: none;
 }
 
 li:hover {
-  padding-left: 28px;
+  background: rgba(99, 102, 241, 0.07);
+
+  transform: translateX(6px);
+
+  padding-left: 30px;
 }
 
-/* Animación inicial de componentes */
+span {
+  color: var(--text-muted);
 
-nav,
-form,
-ul {
-  animation: appear 0.45s ease;
+  font-size: 0.9rem;
 }
+
+/* ==========================================================
+   LOADING
+========================================================== */
+
+.loading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  padding: 45px;
+
+  color: var(--primary);
+
+  font-weight: 800;
+}
+
+.loading::after {
+  content: '';
+
+  width: 22px;
+
+  height: 22px;
+
+  border-radius: 50%;
+
+  border: 3px solid rgba(99, 102, 241, 0.2);
+
+  border-top-color: var(--primary);
+
+  animation: spin 1s linear infinite;
+}
+
+/* ==========================================================
+   ANIMATIONS
+========================================================== */
 
 @keyframes appear {
   from {
     opacity: 0;
 
-    transform: translateY(15px);
+    transform: translateY(20px);
   }
 
   to {
@@ -412,30 +483,44 @@ ul {
   }
 }
 
-/* ==========================================
-   LOADING STATE
-   Estado de carga de datos
-========================================== */
-
-.loading {
-  text-align: center;
-
-  padding: 40px;
-
-  color: #6366f1;
-
-  font-weight: 600;
-
-  animation: pulse 1.2s infinite;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.4;
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 600px) {
+  header {
+    padding: 28px 22px;
   }
 
-  50% {
-    opacity: 1;
+  header h1 {
+    font-size: 1.7rem;
+  }
+
+  nav {
+    padding: 16px 22px;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+  }
+
+  form {
+    padding: 24px;
+  }
+
+  li {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  button {
+    width: 100%;
   }
 }

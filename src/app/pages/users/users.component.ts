@@ -1,25 +1,14 @@
-import { Component, inject, signal, computed, effect, input, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [
-    RouterLink,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-  ],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
 })
@@ -36,15 +25,9 @@ export class UsersComponent implements OnInit {
     return this.users().filter((u) => u.role === r);
   });
 
-  constructor() {
-    effect(() => {
-      console.log('Filtered users count:', this.filteredUsers().length);
-    });
-  }
-
   ngOnInit() {
     this.loading.set(true);
-
+    // Initial load
     this.userService.getUsers().subscribe({
       next: (data) => {
         this.users.set(data);
@@ -53,6 +36,7 @@ export class UsersComponent implements OnInit {
       error: () => this.loading.set(false),
     });
 
+    // Live search with debounce, switchMap cancels stale requests
     this.searchControl.valueChanges
       .pipe(
         debounceTime(300),

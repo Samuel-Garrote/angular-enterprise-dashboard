@@ -8,6 +8,9 @@ import { User } from '../models/user.model';
 export class UserService {
   private http = inject(HttpClient);
   private apiUrl = 'https://dashboard-api-production-2463.up.railway.app/users';
+
+  //*****CRUD********
+
   private currentUser = signal<User | null>(null);
   user = this.currentUser.asReadonly();
 
@@ -17,6 +20,10 @@ export class UserService {
 
   clearUser() {
     this.currentUser.set(null);
+  }
+
+  getUser(id: number) {
+    return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
   getUsers(search?: string) {
